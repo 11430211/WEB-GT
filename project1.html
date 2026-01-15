@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>虛擬共生 | Symbiosis</title>
+    <title>施工中</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -25,7 +25,7 @@
     <section class="section" style="padding-top: 120px; min-height: 100vh;">
         <!-- 加入 hidden 類別以觸發淡入動畫 -->
         <div class="container hidden">
-            <h1 class="section-title">虛擬共生 (Symbiosis)</h1>
+            <h1 class="section-title">施工中</h1>
             
             <!-- 影片嵌入區 (替換原本的圖片) -->
             <div class="video-container">
@@ -35,21 +35,19 @@
 
             <div class="about-content" style="text-align: left; max-width: 100%;">
                 <h3 style="color: var(--white); margin-bottom: 15px;">專案概述</h3>
-                <p style="margin-bottom: 30px; color: var(--text-muted);">
-                    「虛擬共生」是一個探討數位生命與人類行為之間關係的互動裝置。透過 Kinect 深度攝影機捕捉觀眾的肢體動作，系統會即時生成粒子流體，這些粒子彷彿具有生命般，會隨著觀眾的呼吸與移動而擴散、聚合。
-                </p>
+                <p style="margin-bottom: 30px; color: var(--text-muted);">施工中</p>
 
                 <h3 style="color: var(--white); margin-bottom: 15px;">技術細節</h3>
                 <ul style="color: var(--text-muted); margin-bottom: 30px; list-style: disc; padding-left: 20px;">
-                    <li>開發工具：TouchDesigner, Python</li>
-                    <li>硬體設備：Azure Kinect DK, 高流明投影機</li>
-                    <li>視覺算法：GLSL Shader, Particle System</li>
+                    <li>施工中</li>
+                    <li>施工中</li>
+                    <li>施工中</li>
                 </ul>
 
                 <h3 style="color: var(--white); margin-bottom: 15px;">展出紀錄</h3>
                 <p style="color: var(--text-muted);">
-                    2023 - 數位藝術節 新銳展區<br>
-                    2022 - 校內畢業製作展 金獎
+                    施工中<br>
+                    施工中
                 </p>
             </div>
 
@@ -89,16 +87,16 @@
             <!-- 左側：理性、包裝 -->
             <div style="flex:1; text-align:right; border-right: 1px solid #333; padding-right: 60px; color: #888; opacity: 0.6;">
                 <h3 style="margin-bottom:24px; font-weight:bold; letter-spacing: 2px; font-family: 'Roboto', sans-serif;">ART.FOLIO</h3>
-                <p style="margin-bottom:12px; font-size: 0.9rem;">專注於演算法生成的視覺美學</p>
-                <p style="margin-bottom:12px; font-size: 0.9rem;">追求極致的數位工藝</p>
-                <p style="margin-bottom:12px; font-size: 0.9rem;">以理性構建的完美展示</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">施工中</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">施工中</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">施工中</p>
             </div>
             <!-- 右側：感性、真實 -->
             <div style="flex:1; text-align:left; padding-left: 0px; color: #e0e0e0;">
                 <h3 style="margin-bottom:24px; font-weight:normal; font-family:'Times New Roman', serif; font-style:italic; letter-spacing: 1px;">The Real Me.</h3>
-                <p style="margin-bottom:12px; font-size: 0.9rem;">在雜訊中尋找真實的訊號</p>
-                <p style="margin-bottom:12px; font-size: 0.9rem;">擁抱錯誤與不確定性</p>
-                <p style="margin-bottom:12px; font-size: 0.9rem;">破碎，才是重生的開始</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">施工中</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">施工中</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">施工中</p>
             </div>
         </div>
         <a id="final-link" href="index.html" style="opacity: 0; transition: opacity 2s ease; position:absolute; bottom:30px; right:30px; color:#1a1a1a; text-decoration:none; font-size:12px;" onmouseover="this.style.color='#444'" onmouseout="this.style.color='#1a1a1a'">繼續觀看作品集 &rarr;</a>
@@ -108,6 +106,18 @@
         .sandbox-item { position: absolute; width: 200px; height: 120px; background: #f8f9fa; border: 1px solid #dee2e6; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); user-select: none; pointer-events: auto; }
         .sandbox-item i { font-size: 2rem; color: #495057; margin-bottom: 10px; }
         .sandbox-item span { font-family: sans-serif; color: #212529; font-weight: bold; font-size: 0.9rem; }
+        .pixel-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #6c757d;
+            pointer-events: none;
+            animation: pixel-explode 1.2s cubic-bezier(0.1, 0.8, 0.7, 1.0) forwards;
+        }
+        @keyframes pixel-explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(0); opacity: 0; }
+        }
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
@@ -134,6 +144,31 @@
                         }
                     });
                 });
+            }
+            function createShatterEffect(x, y) {
+                const particleCount = 25;
+                const container = document.getElementById('sandbox-container');
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'pixel-particle';
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 150 + 50;
+                    
+                    const tx = Math.cos(angle) * speed * (Math.random() * 1.5 + 0.5);
+                    const ty = -Math.abs(Math.sin(angle) * speed * 2) - (Math.random() * 100); // Force upward motion
+                    const r = Math.random() * 720 - 360;
+
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y - 10}px`; // Start slightly above the floor
+                    particle.style.setProperty('--tx', `${tx}px`);
+                    particle.style.setProperty('--ty', `${ty}px`);
+                    particle.style.setProperty('--r', `${r}deg`);
+
+                    container.appendChild(particle);
+
+                    setTimeout(() => particle.remove(), 1200); // Match animation duration
+                }
             }
             function initSandbox() {
                 document.getElementById('fake-404').style.display = 'none';
@@ -167,7 +202,7 @@
                     el.addEventListener('mouseenter', () => {
                         if (body.isStatic) {
                             Matter.Body.setStatic(body, false);
-                            Matter.Body.setAngularVelocity(body, Math.random() * 0.2 - 0.1);
+                            Matter.Body.setAngularVelocity(body, Math.random() * 0.6 - 0.3); // 修改：增加旋轉
                         }
                     });
                 }
@@ -180,6 +215,8 @@
                             if (item.body.position.x > window.innerWidth + 150) Matter.Body.setPosition(item.body, { x: -150, y: item.body.position.y });
                             else if (item.body.position.x < -150) Matter.Body.setPosition(item.body, { x: window.innerWidth + 150, y: item.body.position.y });
                         } else if (item.body.position.y > window.innerHeight + 150) {
+                            // 修改：在移除前觸發破碎效果
+                            createShatterEffect(item.body.position.x, window.innerHeight);
                             Composite.remove(world, item.body);
                             item.el.remove();
                             delete items[index];
