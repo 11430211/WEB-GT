@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTFOLIO | New Media Art</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 生成式藝術背景 -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">甘蔗.art</a>
+            <ul class="nav-links">
+                <li><a href="#home">首頁</a></li>
+                <li><a href="#about">關於我</a></li>
+                <li><a href="#projects">專案作品</a></li>
+                <li><a href="#contact">聯絡方式</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 區塊 (首頁) -->
+    <section id="home" class="hero">
+        <div class="container hero-content hidden">
+            <h1>陳綱澤 <span class="highlight">甘蔗</span></h1>
+            <p class="subtitle">新媒體藝術 | 生成式視覺 | 互動裝置</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary">探索作品</a>
+                <a href="#contact" class="btn btn-outline">聯絡我</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我 -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title hidden">關於我自己</h2>
+            
+            <div class="about-layout">
+                <!-- 左側圖片 (從左滑入) -->
+                <div class="about-img-box hidden-left">
+                    <!-- 這裡可以換成 <img src="你的照片.jpg"> -->
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+
+                <!-- 中間文字 (原本的淡入) -->
+                <div class="about-content hidden" style="flex: 1; min-width: 300px;">
+                    <div class="about-text">
+                        <p>在下甘蔗，專注於演算法生成的視覺美學。創造出有機且充滿不確定性的視覺體驗。作品涵蓋互動裝置、動態影像設計與生成式藝術、3D建模。</p>
+                        <div class="skills">
+                            <span class="skill-tag">Processing</span>
+                            <span class="skill-tag">TouchDesigner</span>
+                            <span class="skill-tag">Blender</span>
+                            <span class="skill-tag">CSP</span>
+                            <span class="skill-tag">Arduino</span>
+                            <span class="skill-tag">After Effects</span>
+                            <span class="skill-tag">ART</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 專案作品 -->
+    <section id="projects" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title hidden">Selected Works</h2>
+            
+            <!-- 動態作品區 -->
+            <h3 class="category-title hidden">Dynamic / Interactive</h3>
+            <div class="projects-grid hidden">
+                <!-- 專案卡片 1 -->
+                <div class="project-card hidden">
+                    <a href="project1.html" class="project-img" style="background-color: #ddd;">
+                        <i class="fas fa-vr-cardboard placeholder-icon"></i>
+                    </a>
+                    <div class="project-info">
+                        <h3><a href="project1.html">虛擬共生 (Symbiosis)</a></h3>
+                        <p>即時互動裝置，透過感測器捕捉觀眾動態並轉化為粒子流體。</p>
+                        <div class="project-links">
+                            <a href="project1.html"><i class="fas fa-info-circle"></i> 詳細介紹</a>
+                            <a href="#" target="_blank"><i class="fas fa-play-circle"></i> Watch Video</a>
+                            <a href="#" target="_blank"><i class="fas fa-code"></i> Concept</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 專案卡片 2 -->
+                <div class="project-card hidden">
+                    <a href="project2.html" class="project-img" style="background-color: #ddd;">
+                         <i class="fas fa-wave-square placeholder-icon"></i>
+                    </a>
+                    <div class="project-info">
+                        <h3><a href="project2.html">聲波地景 (Soundscape)</a></h3>
+                        <p>音訊視覺化實驗，將城市噪音轉化為 3D 地形起伏。</p>
+                        <div class="project-links">
+                            <a href="project2.html"><i class="fas fa-info-circle"></i> 詳細介紹</a>
+                            <a href="#" target="_blank"><i class="fas fa-play-circle"></i> Watch Video</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 靜態作品區 -->
+            <h3 class="category-title hidden" style="margin-top: 60px;">Static / Visuals</h3>
+            <div class="projects-grid hidden">
+                <!-- 專案卡片 3 -->
+                <div class="project-card hidden">
+                    <a href="project3.html" class="project-img" style="background-color: #ddd;">
+                         <i class="fas fa-image placeholder-icon"></i>
+                    </a>
+                    <div class="project-info">
+                        <h3><a href="project3.html">無盡迴廊 (Infinite Loop)</a></h3>
+                        <p>數位合成攝影，探討空間與遞迴的哲學概念。</p>
+                        <div class="project-links">
+                            <a href="project3.html"><i class="fas fa-info-circle"></i> 詳細介紹</a>
+                            <a href="#" target="_blank"><i class="fas fa-expand"></i> View Gallery</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡方式 -->
+    <section id="contact" class="section">
+        <div class="container contact-container hidden">
+            <h2 class="section-title">Contact</h2>
+            <p>開放跨領域合作與展覽邀約</p>
+            <div class="social-links">
+                <a href="mailto:example@email.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ART.FOLIO. Designed for New Media Art.</p>
+    </footer>
+
+    <!-- 敘事轉場遮罩 (Narrative Overlay) -->
+    <div id="narrative-overlay">
+        <div class="noise-bg"></div>
+        <h1 class="glitch-text" data-text="我到底...是誰...?">我到底...是誰...?</h1>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

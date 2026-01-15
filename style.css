@@ -1,0 +1,640 @@
+/* --- 變數設定 --- */
+:root {
+    --primary-color: #8b5cf6; /* 主色調：紫色 */
+    --secondary-color: #6366f1; /* 次色調：靛藍 */
+    --accent-color: #38bdf8; /* 亮點色：天藍 */
+    --text-color: #f1f5f9; /* 淺灰白文字 */
+    --text-muted: #94a3b8; /* 次要文字 */
+    --bg-color: #0f172a; /* 深色背景 */
+    --bg-light: #1e293b; /* 卡片背景 */
+    --white: #ffffff;
+    --transition: all 0.3s ease;
+    --gradient: linear-gradient(135deg, #8b5cf6 0%, #38bdf8 100%);
+    --glass-card: rgba(30, 41, 59, 0.4);
+    --glass: rgba(30, 41, 59, 0.7);
+}
+
+/* --- 全局設定 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* 平滑滾動 */
+    background-color: #050505; /* 修正：防止震動時邊緣出現白底 */
+    overflow-x: hidden; /* 修正：防止震動時出現水平捲軸 */
+}
+
+body {
+    font-family: 'Roboto', 'Noto Sans TC', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: transparent; /* 修正：背景色改由 html 控制 */
+    overflow-x: hidden;
+}
+
+/* --- 背景 Canvas --- */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none; /* 確保不影響點擊 */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- 導航欄 --- */
+.navbar {
+    background: rgba(5, 5, 5, 0.6); /* 更透明 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* 文字漸層 */
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+/* --- Hero 區塊 --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: transparent; /* 移除背景色，顯示 Canvas */
+    padding-top: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: var(--transition);
+    margin: 0 10px;
+}
+
+.btn-primary {
+    background: var(--gradient);
+    color: var(--white);
+    border: none;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+}
+
+.btn-outline {
+    border: 2px solid var(--primary-color);
+    color: var(--white);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+/* --- 通用區塊設定 --- */
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    letter-spacing: 3px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--gradient);
+    margin: 10px auto 0;
+}
+
+.bg-light {
+    background: rgba(11, 17, 32, 0.5); /* 半透明，讓背景透出來 */
+}
+
+/* --- 關於我 --- */
+.about-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- 關於我：新版佈局 (左圖-文-右圖) --- */
+.about-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap; /* 手機版自動換行 */
+}
+
+.about-img-box {
+    width: 250px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--accent-color);
+    overflow: visible; /* 允許漸層色塊超出邊界 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative; /* 設定定位基準 */
+    z-index: 1; /* 確保圖片在色塊上方 */
+}
+
+/* 新增：圖片下方的漸層色塊層次 */
+.about-img-box::before {
+    content: '';
+    position: absolute;
+    top: 15px; /* 向下偏移 */
+    left: 15px; /* 向右偏移 */
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    border-radius: 10px;
+    z-index: -1; /* 放在圖片後面 */
+    opacity: 0.6; /* 半透明增加質感 */
+}
+
+/* 如果放入真實圖片，讓它填滿容器 */
+.about-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px; /* 圖片圓角 */
+}
+
+.skills {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--accent-color);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.skill-tag:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+}
+
+/* --- 專案作品 --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: var(--glass-card);
+    backdrop-filter: blur(5px);
+    border-radius: 2px; /* 更銳利的邊角，更有現代感 */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.project-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+    border-color: var(--accent-color);
+}
+
+.project-img {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 3rem;
+    background: rgba(0,0,0,0.3) !important;
+}
+
+.project-info {
+    padding: 20px;
+}
+
+.project-info h3 {
+    margin-bottom: 10px;
+    color: var(--white);
+    font-weight: 300;
+}
+
+/* --- 響應式影片容器 (16:9) --- */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 比例 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.3);
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.project-info p {
+    color: var(--text-muted);
+}
+
+.project-links {
+    margin-top: 15px;
+}
+
+.project-links a {
+    margin-right: 15px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.project-links a:hover {
+    color: var(--accent-color);
+}
+
+/* --- 聯絡方式 --- */
+.contact-container {
+    text-align: center;
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icon {
+    font-size: 2rem;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    color: var(--white);
+    transform: scale(1.1);
+    text-shadow: 0 0 15px var(--primary-color);
+}
+
+/* --- Footer --- */
+footer {
+    background: #020617;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* --- RWD 手機版適配 --- */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0;
+        top: 70px;
+        background: var(--bg-light);
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        display: none; /* 預設隱藏 */
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* --- 動畫類別 (由 JS 觸發) --- */
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+/* 從左側滑入 */
+.hidden-left {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100px);
+    transition: all 1s ease;
+}
+
+/* 從右側滑入 */
+.hidden-right {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(100px);
+    transition: all 1s ease;
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0) !important; /* 強制歸零位移 */
+}
+
+/* 讓專案卡片有依序出現的效果 */
+.project-card:nth-child(2) { transition-delay: 0.2s; }
+.project-card:nth-child(3) { transition-delay: 0.4s; }
+
+/* --- 分類標題 --- */
+.category-title {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    font-weight: 300;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+/* --- 敘事轉場遮罩 (Narrative Overlay) --- */
+#narrative-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 40%, #000 90%), #000; /* 加入邊緣暗角 (Vignette) */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none; /* 預設不擋滑鼠 */
+    transition: none; /* 移除過渡，改成硬切換 (Hard Cut) 以增加緊張感 */
+}
+
+#narrative-overlay.active {
+    opacity: 1;
+    pointer-events: all; /* 啟動時阻擋操作 */
+}
+
+/* 電視雜訊/掃描線背景 */
+.noise-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.1) 4px,
+        rgba(0, 0, 0, 0.5) 4px
+    );
+    background-size: 100% 10px;
+    animation: scanlines 0.2s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 10px; }
+}
+
+/* 故障文字 */
+.glitch-text {
+    font-size: 5rem;
+    font-weight: 900;
+    color: #fff;
+    position: relative;
+    opacity: 0;
+    transform: scale(0.5); /* 初始縮小，準備爆發 */
+}
+
+/* 文字出現的動畫 */
+#narrative-overlay.active .glitch-text {
+    animation: text-appear 0.05s forwards 0.1s, text-shake 0.05s infinite 0.15s; /* 出現後劇烈震動 */
+}
+
+@keyframes text-shake {
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-15px, 15px) scale(1.1); }
+    50% { transform: translate(15px, -15px) scale(0.9); }
+    75% { transform: translate(-15px, -15px) scale(1.1); }
+    100% { transform: translate(15px, 15px) scale(1); }
+}
+
+@keyframes text-appear {
+    0% { opacity: 1; transform: scale(0.5); }
+    70% { transform: scale(1.3); } /* 瞬間放大過頭 (Overshoot) */
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Glitch 核心效果 (偽元素錯位) */
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000; /* 背景色遮擋 */
+}
+
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff0000; /* 改為鮮紅色 (Red) */
+    clip-path: inset(44% 0 61% 0);
+    animation: glitch-anim-1 0.2s infinite linear alternate-reverse; /* 極快速度 (0.2s) */
+}
+
+.glitch-text::after {
+    left: -2px;
+    text-shadow: -2px 0 #0000ff; /* 改為深藍色 (Blue) */
+    clip-path: inset(50% 0 30% 0);
+    animation: glitch-anim-2 0.2s infinite linear alternate-reverse; /* 極快速度 (0.2s) */
+}
+
+@keyframes glitch-anim-1 {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 60% 0); }
+    100% { clip-path: inset(30% 0 30% 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip-path: inset(10% 0 60% 0); }
+    20% { clip-path: inset(30% 0 20% 0); }
+    40% { clip-path: inset(70% 0 10% 0); }
+    60% { clip-path: inset(20% 0 50% 0); }
+    80% { clip-path: inset(60% 0 20% 0); }
+    100% { clip-path: inset(5% 0 80% 0); }
+}
+
+/* --- 崩壞後的自我介紹樣式 (Glitched Mode) --- */
+.glitched-mode .section-title {
+    color: #ff0000;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.glitched-mode .about-text p,
+.glitched-mode .about-content p {
+    color: #ff0000; /* 變成紅色警告色 */
+    font-family: 'Courier New', monospace; /* 變成打字機字體 */
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.glitched-mode .about-img-box,
+.glitched-mode .video-container,
+.glitched-mode .project-img {
+    border-color: #ff0000;
+    color: #ff0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    animation: shake 0.5s infinite; /* 圖片框持續抖動 */
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* --- 全螢幕劇烈震動 (Screen Shake) --- */
+.screen-shake {
+    animation: screen-shake-anim 0.05s infinite; /* 極快震動 */
+}
+
+@keyframes screen-shake-anim {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-30px, 30px); }
+    50% { transform: translate(30px, -30px); }
+    75% { transform: translate(-30px, -30px); }
+    100% { transform: translate(30px, 30px); }
+}

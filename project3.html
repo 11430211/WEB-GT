@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>無盡迴廊 | Infinite Loop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景動畫 -->
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">ART.FOLIO</a>
+            <ul class="nav-links">
+                <li><a href="index.html#projects"><i class="fas fa-arrow-left"></i> 返回首頁</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section" style="padding-top: 120px; min-height: 100vh;">
+        <div class="container hidden">
+            <h1 class="section-title">無盡迴廊 (Infinite Loop)</h1>
+            
+            <div class="project-img" style="height: 400px; margin-bottom: 40px; border-radius: 5px; background: rgba(255,255,255,0.05);">
+                <i class="fas fa-image" style="font-size: 5rem; color: var(--accent-color);"></i>
+            </div>
+
+            <div class="about-content" style="text-align: left; max-width: 100%;">
+                <h3 style="color: var(--white); margin-bottom: 15px;">作品介紹</h3>
+                <p style="margin-bottom: 30px; color: var(--text-muted);">
+                    這是一系列探討「遞迴」與「空間錯置」的數位合成攝影作品。透過 Blender 建模與 Photoshop 後期合成，創造出物理上不可能存在的建築空間，引導觀眾思考現實與虛擬的邊界。
+                </p>
+
+                <h3 style="color: var(--white); margin-bottom: 15px;">創作工具</h3>
+                <ul style="color: var(--text-muted); margin-bottom: 30px; list-style: disc; padding-left: 20px;">
+                    <li>Blender (Cycles Render)</li>
+                    <li>Adobe Photoshop</li>
+                    <li>Lightroom</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 50px; text-align: center;">
+                <a href="index.html#projects" class="btn btn-outline">看其他作品</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ART.FOLIO.</p>
+    </footer>
+
+    <!-- 敘事轉場遮罩 (Narrative Overlay) -->
+    <div id="narrative-overlay">
+        <div class="noise-bg"></div>
+        <h1 class="glitch-text" data-text="創作的意義...??">創作的意義...??</h1>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

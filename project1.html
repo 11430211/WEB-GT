@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虛擬共生 | Symbiosis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景動畫 -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- 簡化版導航 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">ART.FOLIO</a>
+            <ul class="nav-links">
+                <li><a href="index.html#projects"><i class="fas fa-arrow-left"></i> 返回首頁</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section" style="padding-top: 120px; min-height: 100vh;">
+        <!-- 加入 hidden 類別以觸發淡入動畫 -->
+        <div class="container hidden">
+            <h1 class="section-title">虛擬共生 (Symbiosis)</h1>
+            
+            <!-- 影片嵌入區 (替換原本的圖片) -->
+            <div class="video-container">
+                <!-- 請將 src 替換為你的 YouTube 影片連結 (Embed URL) -->
+                <iframe src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1&loop=1&playlist=LXb3EKWsInQ" title="Project Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="about-content" style="text-align: left; max-width: 100%;">
+                <h3 style="color: var(--white); margin-bottom: 15px;">專案概述</h3>
+                <p style="margin-bottom: 30px; color: var(--text-muted);">
+                    「虛擬共生」是一個探討數位生命與人類行為之間關係的互動裝置。透過 Kinect 深度攝影機捕捉觀眾的肢體動作，系統會即時生成粒子流體，這些粒子彷彿具有生命般，會隨著觀眾的呼吸與移動而擴散、聚合。
+                </p>
+
+                <h3 style="color: var(--white); margin-bottom: 15px;">技術細節</h3>
+                <ul style="color: var(--text-muted); margin-bottom: 30px; list-style: disc; padding-left: 20px;">
+                    <li>開發工具：TouchDesigner, Python</li>
+                    <li>硬體設備：Azure Kinect DK, 高流明投影機</li>
+                    <li>視覺算法：GLSL Shader, Particle System</li>
+                </ul>
+
+                <h3 style="color: var(--white); margin-bottom: 15px;">展出紀錄</h3>
+                <p style="color: var(--text-muted);">
+                    2023 - 數位藝術節 新銳展區<br>
+                    2022 - 校內畢業製作展 金獎
+                </p>
+            </div>
+
+            <div style="margin-top: 50px; text-align: center;">
+                <a href="index.html#projects" class="btn btn-outline">看其他作品</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ART.FOLIO.</p>
+    </footer>
+
+    <!-- 敘事轉場遮罩 (Narrative Overlay) -->
+    <div id="narrative-overlay">
+        <div class="noise-bg"></div>
+        <h1 class="glitch-text" data-text="創作的意義...??">創作的意義...??</h1>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

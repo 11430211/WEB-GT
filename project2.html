@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聲波地景 | Soundscape</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景動畫 -->
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">ART.FOLIO</a>
+            <ul class="nav-links">
+                <li><a href="index.html#projects"><i class="fas fa-arrow-left"></i> 返回首頁</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section" style="padding-top: 120px; min-height: 100vh;">
+        <div class="container hidden">
+            <h1 class="section-title">聲波地景 (Soundscape)</h1>
+            
+            <div class="video-container">
+                <!-- 範例影片連結 -->
+                <iframe src="https://www.youtube.com/embed/qC0vDKVPCrw?mute=1" title="Project Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="about-content" style="text-align: left; max-width: 100%;">
+                <h3 style="color: var(--white); margin-bottom: 15px;">創作理念</h3>
+                <p style="margin-bottom: 30px; color: var(--text-muted);">
+                    我們生活在充滿噪音的城市中，但如果聲音變成了可見的地形，這座城市會長什麼樣子？本作品採集了台北市不同時段的環境音，透過頻譜分析（FFT）將聲音頻率轉化為 3D 地形的高低起伏。
+                </p>
+
+                <h3 style="color: var(--white); margin-bottom: 15px;">使用技術</h3>
+                <ul style="color: var(--text-muted); margin-bottom: 30px; list-style: disc; padding-left: 20px;">
+                    <li>Processing (Java)</li>
+                    <li>Ableton Live (音訊處理)</li>
+                    <li>P5.js (網頁呈現版)</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 50px; text-align: center;">
+                <a href="index.html#projects" class="btn btn-outline">看其他作品</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ART.FOLIO.</p>
+    </footer>
+
+    <!-- 敘事轉場遮罩 (Narrative Overlay) -->
+    <div id="narrative-overlay">
+        <div class="noise-bg"></div>
+        <h1 class="glitch-text" data-text="創作的意義...??">創作的意義...??</h1>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
