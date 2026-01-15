@@ -61,5 +61,189 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- 偽 404 與 物理沙盒邏輯 -->
+    <div id="fake-404" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; color:black; font-family:'Times New Roman', serif; z-index:9999; padding: 40px; box-sizing: border-box;">
+        <h1 style="font-size: 40px; margin-top: 20px;">404 Not Found</h1>
+        <p>請嘗試重新整理頁面</p>
+        <hr style="border: 0; border-top: 1px solid #ccc; margin: 20px 0;">
+        <p>nginx/1.18.0 (Ubuntu)</p>
+    </div>
+
+    <div id="white-sandbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:10000; overflow:hidden;">
+        <div id="sandbox-container"></div>
+    </div>
+
+    <!-- 最終落點頁面 -->
+    <div id="final-page" style="display:none; opacity:0; transition: opacity 3s ease; position:fixed; top:0; left:0; width:100%; height:100%; background:black; color:white; z-index:20000; padding: 40px; box-sizing: border-box; font-family: 'PMingLiU', 'New MingLiU', serif; cursor: default;">
+        <div id="final-content-container" style="opacity: 0; transition: opacity 2s ease; display:flex; height:100%; align-items:center; justify-content:center; max-width: 1000px; margin: 0 auto; gap: 60px;">
+            <!-- 左側：理性、包裝 -->
+            <div style="flex:1; text-align:right; border-right: 1px solid #333; padding-right: 60px; color: #888; opacity: 0.6;">
+                <h3 style="margin-bottom:24px; font-weight:bold; letter-spacing: 2px; font-family: 'Roboto', sans-serif;">ART.FOLIO</h3>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">專注於演算法生成的視覺美學</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">追求極致的數位工藝</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">以理性構建的完美展示</p>
+            </div>
+            <!-- 右側：感性、真實 -->
+            <div style="flex:1; text-align:left; padding-left: 0px; color: #e0e0e0;">
+                <h3 style="margin-bottom:24px; font-weight:normal; font-family:'Times New Roman', serif; font-style:italic; letter-spacing: 1px;">The Real Me.</h3>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">在雜訊中尋找真實的訊號</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">擁抱錯誤與不確定性</p>
+                <p style="margin-bottom:12px; font-size: 0.9rem;">破碎，才是重生的開始</p>
+            </div>
+        </div>
+        <a id="final-link" href="index.html" style="opacity: 0; transition: opacity 2s ease; position:absolute; bottom:30px; right:30px; color:#1a1a1a; text-decoration:none; font-size:12px;" onmouseover="this.style.color='#444'" onmouseout="this.style.color='#1a1a1a'">繼續觀看作品集 &rarr;</a>
+    </div>
+
+    <style>
+        .sandbox-item { position: absolute; width: 200px; height: 120px; background: #f8f9fa; border: 1px solid #dee2e6; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); user-select: none; pointer-events: auto; }
+        .sandbox-item i { font-size: 2rem; color: #495057; margin-bottom: 10px; }
+        .sandbox-item span { font-family: sans-serif; color: #212529; font-weight: bold; font-size: 0.9rem; }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('trigger_sandbox')) {
+                sessionStorage.removeItem('trigger_sandbox');
+                initSandbox();
+                return;
+            }
+            const backLink = document.querySelector('a[href="index.html#projects"]');
+            const fake404 = document.getElementById('fake-404');
+            if (backLink) {
+                backLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('body > *:not(#fake-404):not(#white-sandbox):not(script)').forEach(n => n.style.display = 'none');
+                    fake404.style.display = 'block';
+                    document.title = '404 Not Found';
+                    sessionStorage.setItem('trigger_sandbox', 'true');
+                    window.addEventListener('keydown', (ev) => {
+                        if (ev.key === 'F5' || (ev.ctrlKey && ev.key === 'r')) {
+                            ev.preventDefault();
+                            initSandbox();
+                        }
+                    });
+                });
+            }
+            function initSandbox() {
+                document.getElementById('fake-404').style.display = 'none';
+                const sandbox = document.getElementById('white-sandbox');
+                sandbox.style.display = 'block';
+                document.title = 'Pure White';
+                const Engine = Matter.Engine, Runner = Matter.Runner, Bodies = Matter.Bodies, Composite = Matter.Composite, Events = Matter.Events;
+                const engine = Engine.create();
+                const world = engine.world;
+                const container = document.getElementById('sandbox-container');
+                const items = [];
+                let activeCount = 15; // 追蹤剩餘方塊數量
+                const contentData = [
+                    { icon: 'fa-cube', title: 'Symbiosis' }, { icon: 'fa-wave-square', title: 'Soundscape' },
+                    { icon: 'fa-infinity', title: 'Loop' }, { icon: 'fa-eye', title: 'Visual' }, { icon: 'fa-code', title: 'Generative' }
+                ];
+                for (let i = 0; i < 15; i++) {
+                    const data = contentData[i % contentData.length];
+                    const x = Math.random() * window.innerWidth;
+                    // 修改：避開中間區域，只出現在上 30% 或下 30%
+                    const y = Math.random() > 0.5 ? Math.random() * (window.innerHeight * 0.3) : window.innerHeight - Math.random() * (window.innerHeight * 0.3);
+                    
+                    const el = document.createElement('div');
+                    el.className = 'sandbox-item';
+                    el.innerHTML = `<i class="fas ${data.icon}"></i><span>${data.title}</span>`;
+                    container.appendChild(el);
+                    const body = Bodies.rectangle(x, y, 200, 120, { isStatic: true, frictionAir: 0.05 });
+                    body.marqueeSpeed = (Math.random() * 5 + 4) * (Math.random() > 0.5 ? 1 : -1); // 修改：速度加快 (4~9)
+                    Composite.add(world, body);
+                    items.push({ body, el });
+                    el.addEventListener('mouseenter', () => {
+                        if (body.isStatic) {
+                            Matter.Body.setStatic(body, false);
+                            Matter.Body.setAngularVelocity(body, Math.random() * 0.2 - 0.1);
+                        }
+                    });
+                }
+                const runner = Runner.create();
+                Runner.run(runner, engine);
+                Events.on(engine, 'beforeUpdate', () => {
+                    items.forEach((item, index) => {
+                        if (item.body.isStatic) {
+                            Matter.Body.translate(item.body, { x: item.body.marqueeSpeed, y: 0 });
+                            if (item.body.position.x > window.innerWidth + 150) Matter.Body.setPosition(item.body, { x: -150, y: item.body.position.y });
+                            else if (item.body.position.x < -150) Matter.Body.setPosition(item.body, { x: window.innerWidth + 150, y: item.body.position.y });
+                        } else if (item.body.position.y > window.innerHeight + 150) {
+                            Composite.remove(world, item.body);
+                            item.el.remove();
+                            delete items[index];
+                            activeCount--;
+                            
+                            // 當所有方塊都掉落消失後
+                            if (activeCount === 0) {
+                                const finalPage = document.getElementById('final-page');
+                                finalPage.style.display = 'block';
+                                requestAnimationFrame(() => {
+                                    finalPage.style.opacity = '1';
+                                });
+                                setTimeout(() => {
+                                    document.getElementById('white-sandbox').style.display = 'none';
+                                }, 3000);
+                                // 修改：背景變黑(3s)後，再等 1s 才顯示文字
+                                setTimeout(() => {
+                                    const contentContainer = document.getElementById('final-content-container');
+                                    contentContainer.style.opacity = '1';
+
+                                    const paragraphs = Array.from(contentContainer.querySelectorAll('p'));
+                                    const originalTexts = paragraphs.map(p => p.innerHTML);
+                                    paragraphs.forEach(p => p.innerHTML = ''); // Clear all paragraphs
+
+                                    let currentParaIndex = 0;
+
+                                    function typeNextParagraph() {
+                                        if (currentParaIndex < paragraphs.length) {
+                                            const p = paragraphs[currentParaIndex];
+                                            const text = originalTexts[currentParaIndex];
+                                            let i = 0;
+
+                                            function typeChar() {
+                                                if (i < text.length) {
+                                                    // Instability effect: 4% chance to show a glitch character
+                                                    if (Math.random() < 0.04) {
+                                                        p.innerHTML += '█';
+                                                        setTimeout(() => {
+                                                            p.innerHTML = p.innerHTML.slice(0, -1); // Remove glitch char
+                                                            typeChar(); // Retry the same character
+                                                        }, 75);
+                                                    } else {
+                                                        p.innerHTML += text.charAt(i);
+                                                        i++;
+                                                        setTimeout(typeChar, Math.random() * 60 + 20);
+                                                    }
+                                                } else {
+                                                    currentParaIndex++;
+                                                    typeNextParagraph(); // Start next paragraph
+                                                }
+                                            }
+                                            typeChar();
+                                        } else {
+                                            // All paragraphs are done, show the link
+                                            document.getElementById('final-link').style.opacity = '1';
+                                        }
+                                    }
+                                    typeNextParagraph();
+                                }, 4000);
+                            }
+                        }
+                    });
+                });
+                (function renderLoop() {
+                    items.forEach(item => {
+                        if (item && item.el && item.body) {
+                            item.el.style.transform = `translate(${item.body.position.x - 100}px, ${item.body.position.y - 60}px) rotate(${item.body.angle}rad)`;
+                        }
+                    });
+                    requestAnimationFrame(renderLoop);
+                })();
+            }
+        });
+    </script>
 </body>
 </html>
